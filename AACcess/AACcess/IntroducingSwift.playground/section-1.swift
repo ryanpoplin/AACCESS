@@ -21,3 +21,61 @@ let ryan: String = "Family's last name..."
 // classes are passed by reference...
 // changes made to a class will affect the org. class...
 
+var itemCount: Int
+var anotherItemCount: Int = 24
+// type inference...
+var justOneMoreItemCount = 24
+
+func returnAnInt() -> Int {
+    return 24
+}
+
+var currentAge = returnAnInt()
+
+// just always explicitly set a constant or variable type...
+
+var fileCount: Int = 99
+// string interpolation...
+println("There's \(fileCount) files...")
+
+var firstName: String = "Ryan"
+var lastName: String = "Poplin"
+var userName: String = "\(firstName)\(lastName)\(arc4random() % 500)"
+
+// basics of if and else...
+var daysUntilEvent: Int = returnAnInt()
+if daysUntilEvent > 0 {
+    println("You've got some time...")
+} else if daysUntilEvent < 0 {
+    println("You fucked up...")
+} else {
+    println("Get something on the way...")
+}
+
+// use a switch statement...
+var comingAge: Int = 25
+switch comingAge {
+case 0:
+    println("No age...")
+case 25:
+    println("You're going to be 25 years old...")
+default:
+    println("You're dead...")
+}
+
+// basics of looping...
+
+for var i = 0; i < 5; ++i {
+    println("i = \(i)")
+}
+
+// half-open range operator == value on the left to the number before the value on the right side, but no the the right side value...
+for j in 0 ..< 10 {
+    println("j = \(j)")
+}
+
+// inclusive-range operator...
+for k in 1 ... 10 {
+    println("k = \(k)")
+}
+
