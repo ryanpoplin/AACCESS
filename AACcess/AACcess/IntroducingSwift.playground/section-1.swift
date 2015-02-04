@@ -89,3 +89,40 @@ for itemId in itemIds {
     println("itemId: \(itemId)")
 }
 
+var percentageComplete: Float = 20.0
+while percentageComplete < 100.0 {
+    println("\(percentageComplete)% complete...")
+    percentageComplete += 20.0
+}
+println(percentageComplete)
+
+var percentaa: Float = 0.0
+do {
+    percentaa += 20.0
+    println("\(percentaa)% complete...")
+} while percentaa < 100.0
+
+var percentness: Float = 0.0
+do {
+    percentness += 20.0
+    if percentness == 60.0 {
+        println("Task was cancelled...")
+        break
+        // replace 'break' with 'continue' to see it's effect...
+    }
+    println("\(percentness)% complete...")
+} while percentness < 100.0
+
+var ls: [Int] = [24, 25, 26, 27]
+var ms: [Int] = [28, 29, 30, 31]
+
+outer: for l in ls {
+    inner: for m in ms {
+        println("outer: \(l) and inner: \(m)")
+        // break outer
+        // break inner
+        // continue outer
+        // continue inner
+    }
+}
+
