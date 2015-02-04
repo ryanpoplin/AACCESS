@@ -79,3 +79,13 @@ for k in 1 ... 10 {
     println("k = \(k)")
 }
 
+// ...
+func returnIds() -> Array<Int> {
+    return [24, 25, 26, 27]
+}
+
+var itemIds: [Int] = returnIds()
+for itemId in itemIds {
+    println("itemId: \(itemId)")
+}
+
