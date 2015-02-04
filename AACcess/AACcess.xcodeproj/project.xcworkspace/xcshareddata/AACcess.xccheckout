@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>87259D4A-2B05-4EDA-8852-7D16FE32EDAD</string>
+	<key>IDESourceControlProjectName</key>
+	<string>AACcess</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D22375C27476F81715271F79315027553F121035</key>
+		<string>github.com:ryanpoplin/AACCESS.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>AACcess/AACcess.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D22375C27476F81715271F79315027553F121035</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:ryanpoplin/AACCESS.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D22375C27476F81715271F79315027553F121035</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D22375C27476F81715271F79315027553F121035</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AACCESS</string>
+		</dict>
+	</array>
+</dict>
+</plist>
