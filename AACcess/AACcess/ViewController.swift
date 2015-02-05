@@ -7,12 +7,22 @@
 //
 
 import UIKit
+import CoreData
 
 // type in: command+shift+o...
 // debug, view debugging, capture view hierarchy...
 
 class ViewController: UIViewController, UITableViewDataSource {
 
+    lazy var managedObjectContext: NSManagedObjectContext? = {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        if let managedObjectContext = appDelegate.managedObjectContext {
+            return managedObjectContext
+        } else {
+            return nil
+        }
+    }()
+    
     // a variable to hold an instance of UITableView class...
     // ?
     var tableView: UITableView?
@@ -21,7 +31,10 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         super.viewDidLoad()
         
+        println(managedObjectContext!)
+        
         // UIView before the UITableView...
+        // the view controller comes with a stock UIView?
         let mainView = self.view
         
         // Do any additional setup after loading the view, typically from a nib.
