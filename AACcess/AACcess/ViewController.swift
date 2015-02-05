@@ -33,41 +33,19 @@ class ViewController: UIViewController, UITableViewDataSource, UIAlertViewDelega
     // a variable to hold an instance of UITableView class...
     // ?
     var tableView: UITableView?
-    var alertView: UIAlertView?
     
     // interesting...
     override func viewDidAppear(animated: Bool) {
-        
-        println(managedObjectContext!)
-        
-        let newCategory = NSEntityDescription.insertNewObjectForEntityForName("Categories", inManagedObjectContext: self.managedObjectContext!) as Categories
-        
-        newCategory.title = "Quick Phrases"
-        
-        func presentCategoryInfo() {
-            
-            let fetchRequest = NSFetchRequest(entityName: "Categories")
-            
-            if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Categories] {
-                
-                // will be replaced with the UISplitViewController/View setup later...
-                // consult the AACcess core project for this later...
-                
-                let coreDataAlert = UIAlertController(title: fetchResults[0].title, message: "Here's a category...", preferredStyle: .Alert)
-                
-                self.presentViewController(coreDataAlert, animated: true, completion: nil)
-                
-            }
-            
-        }
-        
-        presentCategoryInfo()
+       
+        // ...
         
     }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        println(managedObjectContext!)
         
         // UIView before the UITableView...
         // the view controller comes with a stock UIView?
@@ -77,52 +55,84 @@ class ViewController: UIViewController, UITableViewDataSource, UIAlertViewDelega
         
         tableView = UITableView(frame: mainView.bounds, style: .Plain)
         
-        // unwrapping the optional value?
-        if let theTableView = tableView {
+        if let moc = self.managedObjectContext {
             
-            // what i want to render in each cell of this UITableView...
-            theTableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "identifier")
+            //            Category.createInManagedObjectContext(moc, title: "Quick Phrases")
+            //            Category.createInManagedObjectContext(moc, title: "Feelings")
+            //            Category.createInManagedObjectContext(moc, title: "Food")
             
-            // ...
-            theTableView.dataSource = self
+            func presentCategoryInfo() {
+                
+                let fetchRequest = NSFetchRequest(entityName: "Category")
+                
+                if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Category] {
+                    
+                    // ...
+                    for var i = 0; i < fetchResults.count; i++ {
+                        
+                        println(fetchResults[i].title)
+                        
+                    }
+                    
+                }
+                
+            }
             
-            // ...
-            theTableView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+            // unwrapping the optional value?
+            if let theTableView = tableView {
+                
+                // what i want to render in each cell of this UITableView...
+                theTableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "identifier")
+                
+                // tableView will get its data through this class, ViewController...
+                theTableView.dataSource = self
+                
+                // ...
+                theTableView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+                
+                mainView.addSubview(theTableView)
+                
+            }
             
-            mainView.addSubview(theTableView)
-        
+            presentCategoryInfo()
+            
         }
         
     }
     
+    // ...
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         return 1
         
     }
     
+    // ...
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 7
+        return 3
         
     }
     
+    // ...
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("identifier", forIndexPath: indexPath) as UITableViewCell
         
-        cell.textLabel?.text = "Section \(indexPath.section), " + "Cell \(indexPath.row)"
+        cell.textLabel?.text = "\(indexPath.row)"
         
         return cell
         
     }
     
+    // ...
     override func prefersStatusBarHidden() -> Bool {
         
         return true
         
     }
     
+    // ...
     override func didReceiveMemoryWarning() {
         
         super.didReceiveMemoryWarning()

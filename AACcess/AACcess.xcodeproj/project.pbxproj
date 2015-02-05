@@ -14,7 +14,7 @@
 		5A709F851A81CA0E00857326 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A709F831A81CA0E00857326 /* LaunchScreen.xib */; };
 		5A709F911A81CA0E00857326 /* AACcessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A709F901A81CA0E00857326 /* AACcessTests.swift */; };
 		5A709F9D1A81DBB700857326 /* Todos.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A709F9C1A81DBB700857326 /* Todos.txt */; };
-		5AE3C74D1A8387F000022816 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE3C74C1A8387F000022816 /* Categories.swift */; };
+		5AE3C74D1A8387F000022816 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE3C74C1A8387F000022816 /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +40,7 @@
 		5A709F901A81CA0E00857326 /* AACcessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AACcessTests.swift; sourceTree = "<group>"; };
 		5A709F9B1A81DB8600857326 /* IntroducingSwift.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = IntroducingSwift.playground; sourceTree = "<group>"; };
 		5A709F9C1A81DBB700857326 /* Todos.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Todos.txt; sourceTree = "<group>"; };
-		5AE3C74C1A8387F000022816 /* Categories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
+		5AE3C74C1A8387F000022816 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +88,7 @@
 				5A709F811A81CA0E00857326 /* Images.xcassets */,
 				5A709F831A81CA0E00857326 /* LaunchScreen.xib */,
 				5A709F791A81CA0E00857326 /* AACcess.xcdatamodeld */,
-				5AE3C74C1A8387F000022816 /* Categories.swift */,
+				5AE3C74C1A8387F000022816 /* Category.swift */,
 				5A709F751A81CA0E00857326 /* Supporting Files */,
 			);
 			path = AACcess;
@@ -229,7 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A709F7D1A81CA0E00857326 /* ViewController.swift in Sources */,
-				5AE3C74D1A8387F000022816 /* Categories.swift in Sources */,
+				5AE3C74D1A8387F000022816 /* Category.swift in Sources */,
 				5A709F781A81CA0E00857326 /* AppDelegate.swift in Sources */,
 				5A709F7B1A81CA0E00857326 /* AACcess.xcdatamodeld in Sources */,
 			);
