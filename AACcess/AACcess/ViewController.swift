@@ -12,26 +12,62 @@ import CoreData
 // type in: command+shift+o...
 // debug, view debugging, capture view hierarchy...
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, UIAlertViewDelegate {
 
     lazy var managedObjectContext: NSManagedObjectContext? = {
+        
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
         if let managedObjectContext = appDelegate.managedObjectContext {
+        
             return managedObjectContext
+        
         } else {
+        
             return nil
+        
         }
-    }()
+    
+        }()
     
     // a variable to hold an instance of UITableView class...
     // ?
     var tableView: UITableView?
+    var alertView: UIAlertView?
+    
+    // interesting...
+    override func viewDidAppear(animated: Bool) {
+        
+        println(managedObjectContext!)
+        
+        let newCategory = NSEntityDescription.insertNewObjectForEntityForName("Categories", inManagedObjectContext: self.managedObjectContext!) as Categories
+        
+        newCategory.title = "Quick Phrases"
+        
+        func presentCategoryInfo() {
+            
+            let fetchRequest = NSFetchRequest(entityName: "Categories")
+            
+            if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Categories] {
+                
+                // will be replaced with the UISplitViewController/View setup later...
+                // consult the AACcess core project for this later...
+                
+                let coreDataAlert = UIAlertController(title: fetchResults[0].title, message: "Here's a category...", preferredStyle: .Alert)
+                
+                self.presentViewController(coreDataAlert, animated: true, completion: nil)
+                
+            }
+            
+        }
+        
+        presentCategoryInfo()
+        
+    }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        println(managedObjectContext!)
         
         // UIView before the UITableView...
         // the view controller comes with a stock UIView?
