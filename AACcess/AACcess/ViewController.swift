@@ -9,10 +9,7 @@
 import UIKit
 import CoreData
 
-// type in: command+shift+o...
-// debug, view debugging, capture view hierarchy...
-
-class ViewController: UIViewController, UITableViewDataSource, UIAlertViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     lazy var managedObjectContext: NSManagedObjectContext? = {
         
@@ -30,115 +27,104 @@ class ViewController: UIViewController, UITableViewDataSource, UIAlertViewDelega
     
         }()
     
-    // a variable to hold an instance of UITableView class...
-    // ?
     var tableView: UITableView?
     
-    // interesting...
-    override func viewDidAppear(animated: Bool) {
-       
-        // ...
-        
-    }
+    var categoryItems = [Category]()
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         println(managedObjectContext!)
-        
-        // UIView before the UITableView...
-        // the view controller comes with a stock UIView?
+            
         let mainView = self.view
         
-        // Do any additional setup after loading the view, typically from a nib.
-        
         tableView = UITableView(frame: mainView.bounds, style: .Plain)
+            
+        if let theTableView = tableView {
+                
+            theTableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "CategoryCell")
+                
+            theTableView.dataSource = self
+            theTableView.delegate = self
+                
+            theTableView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+                
+            mainView.addSubview(theTableView)
+                
+        }
         
         if let moc = self.managedObjectContext {
             
-            //            Category.createInManagedObjectContext(moc, title: "Quick Phrases")
-            //            Category.createInManagedObjectContext(moc, title: "Feelings")
-            //            Category.createInManagedObjectContext(moc, title: "Food")
+            // created but not saved???
+            Category.createInManagedObjectContext(moc, title: "Feelings")
+            Category.createInManagedObjectContext(moc, title: "Food")
+            Category.createInManagedObjectContext(moc, title: "Drink")
             
-            func presentCategoryInfo() {
-                
-                let fetchRequest = NSFetchRequest(entityName: "Category")
-                
-                if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Category] {
-                    
-                    // ...
-                    for var i = 0; i < fetchResults.count; i++ {
-                        
-                        println(fetchResults[i].title)
-                        
-                    }
-                    
-                }
-                
-            }
+            fetchCategory()
+        
+        }
+        
+    }
+    
+    func fetchCategory() {
+        
+        let fetchRequest = NSFetchRequest(entityName: "Category")
+        
+        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Category] {
             
-            // unwrapping the optional value?
-            if let theTableView = tableView {
-                
-                // what i want to render in each cell of this UITableView...
-                theTableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "identifier")
-                
-                // tableView will get its data through this class, ViewController...
-                theTableView.dataSource = self
-                
-                // ...
-                theTableView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
-                
-                mainView.addSubview(theTableView)
-                
-            }
-            
-            presentCategoryInfo()
+            categoryItems = fetchResults
             
         }
         
     }
     
-    // ...
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         return 1
         
     }
     
-    // ...
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 3
+        return categoryItems.count
         
     }
     
-    // ...
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("identifier", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell") as UITableViewCell
         
-        cell.textLabel?.text = "\(indexPath.row)"
+        let categoryItem = categoryItems[indexPath.row]
+        
+        cell.textLabel?.text = categoryItem.title
         
         return cell
         
     }
     
-    // ...
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let categoryItem = categoryItems[indexPath.row]
+        
+        println(categoryItem.title)
+        
+    }
+    
     override func prefersStatusBarHidden() -> Bool {
         
         return true
         
     }
     
-    // ...
     override func didReceiveMemoryWarning() {
         
         super.didReceiveMemoryWarning()
         
-        // Dispose of any resources that can be recreated.
-    
     }
 
 }

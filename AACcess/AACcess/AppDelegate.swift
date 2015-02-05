@@ -13,19 +13,13 @@ import CoreData
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    // size of the iOS device's screen, and must only have on in the entire project...
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        // Override point for customization after application launch.
-        
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.rootViewController = ViewController()
         let mainView = self.window!.rootViewController!.view
-        
-        // should be fine, but why the left black area???
-        
         self.window!.backgroundColor = UIColor.blackColor()
         self.window!.makeKeyAndVisible()
         
