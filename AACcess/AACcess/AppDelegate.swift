@@ -14,7 +14,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var navigationController: UINavigationController?
+    // var navigationController: UINavigationController?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -24,11 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window!.makeKeyAndVisible()
         
-        navigationController = UINavigationController()
+        // navigationController = UINavigationController()
         
         var initialViewController = ViewController()
         
-        self.navigationController?.pushViewController(initialViewController, animated: false)
+        // self.navigationController?.pushViewController(initialViewController, animated: false)
         
         self.window!.rootViewController = initialViewController
         

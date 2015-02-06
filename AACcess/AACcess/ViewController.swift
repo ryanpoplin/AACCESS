@@ -27,7 +27,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
         }()
     
-    var navigationBar: UINavigationBar?
+    // var navigationBar: UINavigationBar?
     
     var tableView: UITableView?
     
@@ -39,26 +39,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         println(managedObjectContext!)
         
-        let mainView = self.view
+        tableView = UITableView(frame: CGRectZero, style: .Plain)
         
-        tableView = UITableView(frame: mainView.bounds, style: .Plain)
+        tableView!.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "CategoryCell")
             
-        if let theTableView = tableView {
-                
-            theTableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "CategoryCell")
-                
-            theTableView.dataSource = self
-            theTableView.delegate = self
+        var viewFrame = self.view.frame
+        
+        viewFrame.size.height -= 100
             
-            var viewFrame = self.view.frame
+        tableView!.frame = viewFrame
             
-            // viewFrame.origin.y += 100
-            
-            viewFrame.size.height -= 100
-            
-            theTableView.frame = viewFrame
-            
-            mainView.addSubview(theTableView)
+        self.view.addSubview(tableView!)
             
 //            let navigationBar = UINavigationBar(frame: CGRectMake(0, UIScreen.mainScreen().bounds.size.height, UIScreen.mainScreen().bounds.size.width, 50))
 //            
@@ -72,17 +63,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             addButton.addTarget(self, action: "addNewCategory", forControlEvents: .TouchUpInside)
             self.view.addSubview(addButton)
                 
-        }
+        tableView!.dataSource = self
+        tableView!.delegate = self
         
-        if let moc = self.managedObjectContext {
-            
-            Category.createInManagedObjectContext(moc, title: "Feelings")
-            Category.createInManagedObjectContext(moc, title: "Food")
-            Category.createInManagedObjectContext(moc, title: "Drink")
-            
-            fetchCategory()
-        
-        }
+        fetchCategory()
         
     }
 
@@ -105,7 +89,42 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let addCategoryAlertViewTag = 0
     func addNewCategory() {
         
+        var titlePrompt = UIAlertController(title: "Enter Category Title", message: "Enter Text", preferredStyle: .Alert)
         
+        var titleTextField: UITextField?
+        titlePrompt.addTextFieldWithConfigurationHandler {
+            (textField) -> Void in
+            titleTextField = textField
+            textField.placeholder = "Title"
+        }
+        
+        titlePrompt.addAction(UIAlertAction(title: "Ok",
+            style: .Default, handler: {
+            (action) -> Void in
+            if let textField = titleTextField {
+                self.saveNewCategory(textField.text)
+            }
+        }))
+        
+        self.presentViewController(titlePrompt, animated: true, completion: nil)
+        
+    }
+    
+    func saveNewCategory(title: String) {
+        
+        var newCategory = Category.createInManagedObjectContext(self.managedObjectContext!, title: title)
+        
+        self.fetchCategory()
+        
+        if let newCategoryIndex = find(categoryItems, newCategory) {
+            
+            let newCategoryItemIndexPath = NSIndexPath(forItem: newCategoryIndex, inSection: 0)
+            
+            tableView!.insertRowsAtIndexPaths([newCategoryItemIndexPath], withRowAnimation: .Automatic)
+            
+            save()
+            
+        }
         
     }
     
@@ -127,13 +146,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             
+            save()
+            
         }
-        
-    }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
-        return 1
         
     }
     
@@ -167,6 +182,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         return true
         
+    }
+    
+    func save() {
+        
+        //...
+        if let moc = self.managedObjectContext {
+            var error: NSError? = nil
+            if (managedObjectContext!.save(&error)) {
+                println(error?.localizedDescription)
+            }
+        }
+    
     }
     
     override func didReceiveMemoryWarning() {
