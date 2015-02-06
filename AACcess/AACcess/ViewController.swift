@@ -27,6 +27,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
         }()
     
+    var navigationBar: UINavigationBar?
+    
     var tableView: UITableView?
     
     var categoryItems = [Category]()
@@ -36,7 +38,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         
         println(managedObjectContext!)
-            
+        
         let mainView = self.view
         
         tableView = UITableView(frame: mainView.bounds, style: .Plain)
@@ -50,11 +52,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             var viewFrame = self.view.frame
             
+            // viewFrame.origin.y += 100
+            
             viewFrame.size.height -= 100
             
             theTableView.frame = viewFrame
             
             mainView.addSubview(theTableView)
+            
+//            let navigationBar = UINavigationBar(frame: CGRectMake(0, UIScreen.mainScreen().bounds.size.height, UIScreen.mainScreen().bounds.size.width, 50))
+//            
+//            navigationBar.backgroundColor = UIColor.redColor()
+//            
+//            self.view.addSubview(navigationBar)
             
             let addButton = UIButton(frame: CGRectMake(0, UIScreen.mainScreen().bounds.size.height - 100, UIScreen.mainScreen().bounds.size.width, 100))
             addButton.setTitle("Add Category", forState: .Normal)
@@ -75,7 +85,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
     }
-    
+
     func fetchCategory() {
         
         let fetchRequest = NSFetchRequest(entityName: "Category")
@@ -92,7 +102,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    // ...
     let addCategoryAlertViewTag = 0
     func addNewCategory() {
         

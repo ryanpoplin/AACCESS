@@ -14,14 +14,25 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var navigationController: UINavigationController?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.window!.rootViewController = ViewController()
-        let mainView = self.window!.rootViewController!.view
-        self.window!.backgroundColor = UIColor.blackColor()
+        
+        self.window!.backgroundColor = UIColor.whiteColor()
+        
         self.window!.makeKeyAndVisible()
+        
+        navigationController = UINavigationController()
+        
+        var initialViewController = ViewController()
+        
+        self.navigationController?.pushViewController(initialViewController, animated: false)
+        
+        self.window!.rootViewController = initialViewController
+        
+        let mainView = self.window!.rootViewController!.view
         
         return true
         
