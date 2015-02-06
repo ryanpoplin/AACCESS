@@ -47,16 +47,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 
             theTableView.dataSource = self
             theTableView.delegate = self
-                
-            theTableView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
-                
+            
+            var viewFrame = self.view.frame
+            
+            viewFrame.size.height -= 100
+            
+            theTableView.frame = viewFrame
+            
             mainView.addSubview(theTableView)
+            
+            let addButton = UIButton(frame: CGRectMake(0, UIScreen.mainScreen().bounds.size.height - 100, UIScreen.mainScreen().bounds.size.width, 100))
+            addButton.setTitle("Add Category", forState: .Normal)
+            addButton.backgroundColor = UIColor(red: 0.5, green: 0.9, blue: 0.5, alpha: 1.0)
+            addButton.addTarget(self, action: "addNewCategory", forControlEvents: .TouchUpInside)
+            self.view.addSubview(addButton)
                 
         }
         
         if let moc = self.managedObjectContext {
             
-            // created but not saved???
             Category.createInManagedObjectContext(moc, title: "Feelings")
             Category.createInManagedObjectContext(moc, title: "Food")
             Category.createInManagedObjectContext(moc, title: "Drink")
@@ -78,6 +87,36 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Category] {
             
             categoryItems = fetchResults
+            
+        }
+        
+    }
+    
+    // ...
+    let addCategoryAlertViewTag = 0
+    func addNewCategory() {
+        
+        
+        
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        
+        return true
+        
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if editingStyle == .Delete {
+            
+            let logItemToDelete = categoryItems[indexPath.row]
+            
+            managedObjectContext?.deleteObject(logItemToDelete)
+            
+            self.fetchCategory()
+            
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             
         }
         
