@@ -13,26 +13,32 @@ import CoreData
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    // create variables to hold a UIWindow and UINavigationController objects...
     var window: UIWindow?
-    // var navigationController: UINavigationController?
+    var navigationController: UINavigationController?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        // the size of the window...
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
+        // the color of the object...
         self.window!.backgroundColor = UIColor.whiteColor()
         
-        self.window!.makeKeyAndVisible()
+        // create a UINavigationController object...
+        navigationController = UINavigationController()
         
-        // navigationController = UINavigationController()
-        
+        // create an instance of the ViewController object...
         var initialViewController = ViewController()
         
-        // self.navigationController?.pushViewController(initialViewController, animated: false)
+        // tell the navigationController to (segue) to the ViewController...
+        navigationController?.pushViewController(initialViewController, animated: false)
         
-        self.window!.rootViewController = initialViewController
+        // make the navigationController the root view...
+        self.window!.rootViewController = navigationController
         
-        let mainView = self.window!.rootViewController!.view
+        // ...
+        self.window!.makeKeyAndVisible()
         
         return true
         

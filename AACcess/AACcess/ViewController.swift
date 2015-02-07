@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 ExcepApps, Inc. All rights reserved.
 //
 
+/* 1.) REVIEW JQ'S TUT'S CODE AND COMMENT THIS SHIT OUT... */
+/* 2.) READ IOS 8 COOKBOOKS' RELATIONAL COREDATA PROGRAMMING SECTION... */
+
 import UIKit
 import CoreData
 
@@ -27,8 +30,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
         }()
     
-    // var navigationBar: UINavigationBar?
-    
     var tableView: UITableView?
     
     var categoryItems = [Category]()
@@ -38,6 +39,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         
         println(managedObjectContext!)
+        
+        navigationController?.navigationBar.topItem?.title = "Categories"
         
         tableView = UITableView(frame: CGRectZero, style: .Plain)
         
@@ -51,17 +54,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         self.view.addSubview(tableView!)
             
-//            let navigationBar = UINavigationBar(frame: CGRectMake(0, UIScreen.mainScreen().bounds.size.height, UIScreen.mainScreen().bounds.size.width, 50))
-//            
-//            navigationBar.backgroundColor = UIColor.redColor()
-//            
-//            self.view.addSubview(navigationBar)
-            
-            let addButton = UIButton(frame: CGRectMake(0, UIScreen.mainScreen().bounds.size.height - 100, UIScreen.mainScreen().bounds.size.width, 100))
+        let addButton = UIButton(frame: CGRectMake(0, UIScreen.mainScreen().bounds.size.height - 100, UIScreen.mainScreen().bounds.size.width, 100))
             addButton.setTitle("Add Category", forState: .Normal)
             addButton.backgroundColor = UIColor(red: 0.5, green: 0.9, blue: 0.5, alpha: 1.0)
-            addButton.addTarget(self, action: "addNewCategory", forControlEvents: .TouchUpInside)
-            self.view.addSubview(addButton)
+        addButton.addTarget(self, action: "addNewCategory", forControlEvents: .TouchUpInside)
+        self.view.addSubview(addButton)
                 
         tableView!.dataSource = self
         tableView!.delegate = self
@@ -69,7 +66,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         fetchCategory()
         
     }
-
+    
     func fetchCategory() {
         
         let fetchRequest = NSFetchRequest(entityName: "Category")
@@ -164,6 +161,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let categoryItem = categoryItems[indexPath.row]
         
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        
         cell.textLabel?.text = categoryItem.title
         
         return cell
@@ -171,27 +170,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        let categoryItem = categoryItems[indexPath.row]
-        
-        println(categoryItem.title)
-        
-    }
-    
-    override func prefersStatusBarHidden() -> Bool {
-        
-        return true
+
+        let drilledDownCategoryViewController = DrilledDownCategoryViewController()
+
+        // logical association...
+        // need to know which categories' categoryDrilledItems to render in...
+        // the DrilledDownCategoryViewController's UITableView...
+        navigationController?.pushViewController(drilledDownCategoryViewController, animated: true)
         
     }
     
     func save() {
         
-        //...
-        if let moc = self.managedObjectContext {
-            var error: NSError? = nil
-            if (managedObjectContext!.save(&error)) {
-                println(error?.localizedDescription)
-            }
+        var error: NSError? = nil
+        if managedObjectContext!.save(&error) {
+            println(error?.localizedDescription)
         }
     
     }

@@ -14,6 +14,8 @@
 		5A709F851A81CA0E00857326 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A709F831A81CA0E00857326 /* LaunchScreen.xib */; };
 		5A709F911A81CA0E00857326 /* AACcessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A709F901A81CA0E00857326 /* AACcessTests.swift */; };
 		5AE3C74D1A8387F000022816 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE3C74C1A8387F000022816 /* Category.swift */; };
+		5AE3C7531A856AFC00022816 /* ObjCTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE3C7521A856AFC00022816 /* ObjCTesting.m */; };
+		5AE3C7551A85825800022816 /* DrilledDownCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE3C7541A85825800022816 /* DrilledDownCategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +41,10 @@
 		5A709F901A81CA0E00857326 /* AACcessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AACcessTests.swift; sourceTree = "<group>"; };
 		5A709F9B1A81DB8600857326 /* IntroducingSwift.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = IntroducingSwift.playground; sourceTree = "<group>"; };
 		5AE3C74C1A8387F000022816 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		5AE3C7501A856AFB00022816 /* AACcess-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AACcess-Bridging-Header.h"; sourceTree = "<group>"; };
+		5AE3C7511A856AFC00022816 /* ObjCTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCTesting.h; sourceTree = "<group>"; };
+		5AE3C7521A856AFC00022816 /* ObjCTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCTesting.m; sourceTree = "<group>"; };
+		5AE3C7541A85825800022816 /* DrilledDownCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrilledDownCategoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,12 +87,16 @@
 			isa = PBXGroup;
 			children = (
 				5A709F9A1A81DB5D00857326 /* Playgrounds */,
+				5AE3C7501A856AFB00022816 /* AACcess-Bridging-Header.h */,
 				5A709F771A81CA0E00857326 /* AppDelegate.swift */,
 				5A709F7C1A81CA0E00857326 /* ViewController.swift */,
+				5AE3C7541A85825800022816 /* DrilledDownCategoryViewController.swift */,
 				5A709F811A81CA0E00857326 /* Images.xcassets */,
 				5A709F831A81CA0E00857326 /* LaunchScreen.xib */,
 				5A709F791A81CA0E00857326 /* AACcess.xcdatamodeld */,
 				5AE3C74C1A8387F000022816 /* Category.swift */,
+				5AE3C7511A856AFC00022816 /* ObjCTesting.h */,
+				5AE3C7521A856AFC00022816 /* ObjCTesting.m */,
 				5A709F751A81CA0E00857326 /* Supporting Files */,
 			);
 			path = AACcess;
@@ -225,8 +235,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A709F7D1A81CA0E00857326 /* ViewController.swift in Sources */,
+				5AE3C7551A85825800022816 /* DrilledDownCategoryViewController.swift in Sources */,
 				5AE3C74D1A8387F000022816 /* Category.swift in Sources */,
 				5A709F781A81CA0E00857326 /* AppDelegate.swift in Sources */,
+				5AE3C7531A856AFC00022816 /* ObjCTesting.m in Sources */,
 				5A709F7B1A81CA0E00857326 /* AACcess.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,9 +356,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = AACcess/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "AACcess/AACcess-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -355,9 +370,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = AACcess/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "AACcess/AACcess-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
