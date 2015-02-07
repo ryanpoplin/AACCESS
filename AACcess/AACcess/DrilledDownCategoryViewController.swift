@@ -115,17 +115,21 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
     
     func saveNewCategoryItem(title: String, category: String) {
         
-        var newCategoryItem = CategoryItem.createInManagedObjectContext(self.managedObjectContext!, title: title, category: category)
+        if title != "" {
         
-        self.fetchCategory()
+            var newCategoryItem = CategoryItem.createInManagedObjectContext(self.managedObjectContext!, title: title, category: category)
         
-        if let newCategoryIndex = find(categoryItemsItems, newCategoryItem) {
+            self.fetchCategory()
+        
+            if let newCategoryIndex = find(categoryItemsItems, newCategoryItem) {
             
-            let newCategoryItemIndexPath = NSIndexPath(forItem: newCategoryIndex, inSection: 0)
+                let newCategoryItemIndexPath = NSIndexPath(forItem: newCategoryIndex, inSection: 0)
             
-            tableView!.insertRowsAtIndexPaths([newCategoryItemIndexPath], withRowAnimation: .Automatic)
+                tableView!.insertRowsAtIndexPaths([newCategoryItemIndexPath], withRowAnimation: .Automatic)
             
-            save()
+                save()
+            
+            }
             
         }
         

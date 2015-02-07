@@ -107,17 +107,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func saveNewCategory(title: String) {
         
-        var newCategory = Category.createInManagedObjectContext(self.managedObjectContext!, title: title)
+        if title != "" {
         
-        self.fetchCategory()
+            var newCategory = Category.createInManagedObjectContext(self.managedObjectContext!, title: title)
         
-        if let newCategoryIndex = find(categoryItems, newCategory) {
+            self.fetchCategory()
+        
+            if let newCategoryIndex = find(categoryItems, newCategory) {
             
-            let newCategoryItemIndexPath = NSIndexPath(forItem: newCategoryIndex, inSection: 0)
+                let newCategoryItemIndexPath = NSIndexPath(forItem: newCategoryIndex, inSection: 0)
             
-            tableView!.insertRowsAtIndexPaths([newCategoryItemIndexPath], withRowAnimation: .Automatic)
+                tableView!.insertRowsAtIndexPaths([newCategoryItemIndexPath], withRowAnimation: .Automatic)
             
-            save()
+                save()
+            
+            }
             
         }
         
