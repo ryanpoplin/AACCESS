@@ -37,7 +37,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         super.viewDidLoad()
         
-        println(managedObjectContext!)
+        // println(managedObjectContext!)
         
         navigationController?.navigationBar.topItem?.title = "Categories"
         
@@ -134,6 +134,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if editingStyle == .Delete {
             
             let logItemToDelete = categoryItems[indexPath.row]
+
+            for x in categoryItemsArr {
+                
+                managedObjectContext?.deleteObject(x as NSManagedObject)
+                
+            }
             
             managedObjectContext?.deleteObject(logItemToDelete)
             
@@ -175,8 +181,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         categoryTitleProperty = categoryItem.title
         
-        println(categoryTitleProperty)
-        
         navigationController?.pushViewController(drilledDownCategoryViewController, animated: true)
         
     }
@@ -185,7 +189,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         var error: NSError? = nil
         if managedObjectContext!.save(&error) {
-            println(error?.localizedDescription)
+            // println(error?.localizedDescription)
         }
         
     }

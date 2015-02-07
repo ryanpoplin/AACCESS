@@ -11,6 +11,8 @@ import CoreData
 
 @UIApplicationMain  
 
+// configure design, and UI programming features...
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // create variables to hold a UIWindow and UINavigationController objects...

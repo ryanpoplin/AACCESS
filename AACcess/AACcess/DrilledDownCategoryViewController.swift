@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 
+public var categoryItemsArr: Array<AnyObject>!
+
 class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     lazy var managedObjectContext: NSManagedObjectContext? = {
@@ -29,13 +31,13 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
     
     var tableView: UITableView?
     
-    var categoryItems = [CategoryItem]()
+    var categoryItemsItems = [CategoryItem]()
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        println(managedObjectContext!)
+        // println(managedObjectContext!)
         
         tableView = UITableView(frame: CGRectZero, style: .Plain)
         
@@ -76,7 +78,11 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
         
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [CategoryItem] {
             
-            categoryItems = fetchResults
+            categoryItemsItems = fetchResults
+            
+            categoryItemsArr = categoryItemsItems
+            
+            println(categoryItemsArr)
             
         }
         
@@ -98,7 +104,6 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
                 (action) -> Void in
             if let textField = titleTextField {
                 if let categoryTitle = categoryTitleProperty {
-                    println("This isn't being executed...why?")
                     self.saveNewCategoryItem(textField.text, category: categoryTitle)
                 }
             }
@@ -114,7 +119,7 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
         
         self.fetchCategory()
         
-        if let newCategoryIndex = find(categoryItems, newCategoryItem) {
+        if let newCategoryIndex = find(categoryItemsItems, newCategoryItem) {
             
             let newCategoryItemIndexPath = NSIndexPath(forItem: newCategoryIndex, inSection: 0)
             
@@ -136,7 +141,7 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
         
         if editingStyle == .Delete {
             
-            let logItemToDelete = categoryItems[indexPath.row]
+            let logItemToDelete = categoryItemsItems[indexPath.row]
             
             managedObjectContext?.deleteObject(logItemToDelete)
             
@@ -152,7 +157,7 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return categoryItems.count
+        return categoryItemsItems.count
         
     }
     
@@ -160,10 +165,10 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
         
         let cell = tableView.dequeueReusableCellWithIdentifier("CategoryItemCell") as UITableViewCell
         
-        let categoryItem = categoryItems[indexPath.row]
+        let categoryItem = categoryItemsItems[indexPath.row]
         
-        println(categoryItem.title)
-        println(categoryItem.category)
+//        println(categoryItem.title)
+//        println(categoryItem.category)
         
         cell.textLabel?.text = categoryItem.title
         
@@ -173,7 +178,7 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        println("Pressed...")
+        // println("Pressed...")
         
     }
     
@@ -181,7 +186,7 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
         
         var error: NSError? = nil
         if managedObjectContext!.save(&error) {
-            println(error?.localizedDescription)
+            // println(error?.localizedDescription)
         }
         
     }
