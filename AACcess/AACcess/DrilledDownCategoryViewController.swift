@@ -70,7 +70,7 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
         
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        let predicate = NSPredicate(format: "category == %@", "Beer")
+        let predicate = NSPredicate(format: "category == %@", categoryTitleProperty)
         
         fetchRequest.predicate = predicate
         
@@ -83,7 +83,7 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
     }
     
     func addNewCategoryItem() {
-                
+        
         var titlePrompt = UIAlertController(title: "Enter Category Item Title", message: "Enter Text", preferredStyle: .Alert)
         
         var titleTextField: UITextField?
@@ -97,7 +97,7 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
             style: .Default, handler: {
                 (action) -> Void in
             if let textField = titleTextField {
-                if let categoryTitle = ViewController().categoryTitleProperty {
+                if let categoryTitle = categoryTitleProperty {
                     println("This isn't being executed...why?")
                     self.saveNewCategoryItem(textField.text, category: categoryTitle)
                 }

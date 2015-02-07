@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 
+public var categoryTitleProperty: String!
+
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     lazy var managedObjectContext: NSManagedObjectContext? = {
@@ -164,8 +166,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
         
     }
-    
-    var categoryTitleProperty: String!
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
