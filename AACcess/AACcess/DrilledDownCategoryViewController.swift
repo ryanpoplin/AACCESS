@@ -70,9 +70,9 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
         
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-//        let predicate = NSPredicate(format: "category == %@", "Beer")
-//        
-//        fetchRequest.predicate = predicate
+        let predicate = NSPredicate(format: "category == %@", "Beer")
+        
+        fetchRequest.predicate = predicate
         
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [CategoryItem] {
             
@@ -96,11 +96,12 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
         titlePrompt.addAction(UIAlertAction(title: "Ok",
             style: .Default, handler: {
                 (action) -> Void in
-                if let textField = titleTextField {
-                    if let categoryTitle = ViewController().categoryTitleProperty {
-                        self.saveNewCategoryItem(textField.text, category: categoryTitle)
-                    }
+            if let textField = titleTextField {
+                if let categoryTitle = ViewController().categoryTitleProperty {
+                    println("This isn't being executed...why?")
+                    self.saveNewCategoryItem(textField.text, category: categoryTitle)
                 }
+            }
         }))
         
         self.presentViewController(titlePrompt, animated: true, completion: nil)

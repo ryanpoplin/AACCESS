@@ -17,11 +17,8 @@ class CategoryItem: NSManagedObject {
     class func createInManagedObjectContext(moc: NSManagedObjectContext, title: String, category: String) -> CategoryItem {
         
         let newCategoryItem = NSEntityDescription.insertNewObjectForEntityForName("CategoryItem", inManagedObjectContext: moc) as CategoryItem
-        
+                
         newCategoryItem.title = title
-        
-        println(category)
-        
         newCategoryItem.category = category
         
         return newCategoryItem

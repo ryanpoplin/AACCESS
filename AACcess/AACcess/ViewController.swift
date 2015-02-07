@@ -80,7 +80,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    let addCategoryAlertViewTag = 0
     func addNewCategory() {
         
         var titlePrompt = UIAlertController(title: "Enter Category Title", message: "Enter Text", preferredStyle: .Alert)

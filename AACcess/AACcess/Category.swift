@@ -17,6 +17,8 @@ class Category: NSManagedObject {
         
         let newCategory = NSEntityDescription.insertNewObjectForEntityForName("Category", inManagedObjectContext: moc) as Category
         
+        
+        
         newCategory.title = title
         
         return newCategory
