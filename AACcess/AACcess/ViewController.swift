@@ -6,28 +6,25 @@
 //  Copyright (c) 2015 ExcepApps, Inc. All rights reserved.
 //
 
-/* 1.) REVIEW JQ'S TUT'S CODE AND COMMENT THIS SHIT OUT... */
-/* 2.) READ IOS 8 COOKBOOKS' RELATIONAL COREDATA PROGRAMMING SECTION... */
-
 import UIKit
 import CoreData
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     lazy var managedObjectContext: NSManagedObjectContext? = {
         
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         
         if let managedObjectContext = appDelegate.managedObjectContext {
-        
+            
             return managedObjectContext
-        
+            
         } else {
-        
+            
             return nil
-        
+            
         }
-    
+        
         }()
     
     var tableView: UITableView?
@@ -45,21 +42,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView = UITableView(frame: CGRectZero, style: .Plain)
         
         tableView!.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "CategoryCell")
-            
+        
         var viewFrame = self.view.frame
         
         viewFrame.size.height -= 100
-            
+        
         tableView!.frame = viewFrame
-            
+        
         self.view.addSubview(tableView!)
-            
+        
         let addButton = UIButton(frame: CGRectMake(0, UIScreen.mainScreen().bounds.size.height - 100, UIScreen.mainScreen().bounds.size.width, 100))
-            addButton.setTitle("Add Category", forState: .Normal)
-            addButton.backgroundColor = UIColor(red: 0.5, green: 0.9, blue: 0.5, alpha: 1.0)
+        addButton.setTitle("Add Category", forState: .Normal)
+        addButton.backgroundColor = UIColor(red: 0.5, green: 0.9, blue: 0.5, alpha: 1.0)
         addButton.addTarget(self, action: "addNewCategory", forControlEvents: .TouchUpInside)
         self.view.addSubview(addButton)
-                
+        
         tableView!.dataSource = self
         tableView!.delegate = self
         
@@ -97,10 +94,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         titlePrompt.addAction(UIAlertAction(title: "Ok",
             style: .Default, handler: {
-            (action) -> Void in
-            if let textField = titleTextField {
-                self.saveNewCategory(textField.text)
-            }
+                (action) -> Void in
+                if let textField = titleTextField {
+                    self.saveNewCategory(textField.text)
+                }
         }))
         
         self.presentViewController(titlePrompt, animated: true, completion: nil)
@@ -169,13 +166,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    var categoryTitleProperty: String!
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
+        
+        let categoryItem = categoryItems[indexPath.row]
+        
         let drilledDownCategoryViewController = DrilledDownCategoryViewController()
 
-        // logical association...
-        // need to know which categories' categoryDrilledItems to render in...
-        // the DrilledDownCategoryViewController's UITableView...
+        categoryTitleProperty = categoryItem.title
+        
+        println(categoryTitleProperty)
+        
         navigationController?.pushViewController(drilledDownCategoryViewController, animated: true)
         
     }
@@ -186,7 +188,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if managedObjectContext!.save(&error) {
             println(error?.localizedDescription)
         }
-    
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -194,5 +196,5 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.didReceiveMemoryWarning()
         
     }
-
+    
 }

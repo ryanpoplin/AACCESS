@@ -3,7 +3,12 @@
     <entity name="Category" representedClassName="AACcess.Category" syncable="YES">
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="CategoryItem" representedClassName="AACcess.CategoryItem" syncable="YES">
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Category" positionX="-63" positionY="-18" width="128" height="60"/>
+        <element name="Category" positionX="-63" positionY="-18" width="128" height="58"/>
+        <element name="CategoryItem" positionX="-63" positionY="-9" width="128" height="73"/>
     </elements>
 </model>
