@@ -139,15 +139,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             let fetchRequest = NSFetchRequest(entityName: "CategoryItem")
             
-            let predicate = NSPredicate(format: "category == %@", categoryTitleProperty)
+            let predicate = NSPredicate(format: "category == %@", logItemToDelete.title)
             
             fetchRequest.predicate = predicate
             
             if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [CategoryItem] {
                 
-                for x in fetchResults {
+                var testArr = fetchResults
+                
+                println(testArr)
+                
+                for x in testArr {
                     
                     managedObjectContext?.deleteObject(x as NSManagedObject)
+                    
+                    save()
                     
                 }
                 
