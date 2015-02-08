@@ -9,8 +9,6 @@
 import UIKit
 import CoreData
 
-public var categoryItemsArr: Array<AnyObject>!
-
 class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     lazy var managedObjectContext: NSManagedObjectContext? = {
@@ -36,8 +34,6 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        // println(managedObjectContext!)
         
         tableView = UITableView(frame: CGRectZero, style: .Plain)
         
@@ -79,11 +75,7 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [CategoryItem] {
             
             categoryItemsItems = fetchResults
-            
-            categoryItemsArr = categoryItemsItems
-            
-            println(categoryItemsArr)
-            
+
         }
         
     }
@@ -147,7 +139,7 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
             
             let logItemToDelete = categoryItemsItems[indexPath.row]
             
-            managedObjectContext?.deleteObject(logItemToDelete)
+            managedObjectContext?.deleteObject(logItemToDelete as NSManagedObject)
             
             self.fetchCategory()
             
@@ -171,9 +163,6 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
         
         let categoryItem = categoryItemsItems[indexPath.row]
         
-//        println(categoryItem.title)
-//        println(categoryItem.category)
-        
         cell.textLabel?.text = categoryItem.title
         
         return cell
@@ -181,8 +170,6 @@ class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        // println("Pressed...")
         
     }
     

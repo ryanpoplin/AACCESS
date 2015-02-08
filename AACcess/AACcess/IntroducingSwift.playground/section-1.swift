@@ -140,4 +140,3 @@ import Cocoa
 //// a double...
 //var distance = 0.0
 //var seconds: Float = 0.0
-

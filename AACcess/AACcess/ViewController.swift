@@ -37,8 +37,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         super.viewDidLoad()
         
-        // println(managedObjectContext!)
-        
         navigationController?.navigationBar.topItem?.title = "Categories"
         
         tableView = UITableView(frame: CGRectZero, style: .Plain)
@@ -77,6 +75,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Category] {
             
             categoryItems = fetchResults
+            println(testArr)
             
         }
         
@@ -138,10 +137,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if editingStyle == .Delete {
             
             let logItemToDelete = categoryItems[indexPath.row]
-
-            for x in categoryItemsArr {
+            
+            let fetchRequest = NSFetchRequest(entityName: "CategoryItem")
+            
+            let predicate = NSPredicate(format: "category == %@", categoryTitleProperty)
+            
+            fetchRequest.predicate = predicate
+            
+            if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [CategoryItem] {
                 
-                managedObjectContext?.deleteObject(x as NSManagedObject)
+                for x in fetchResults {
+                    
+                    managedObjectContext?.deleteObject(x as NSManagedObject)
+                    
+                }
                 
             }
             
