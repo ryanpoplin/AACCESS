@@ -75,7 +75,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Category] {
             
             categoryItems = fetchResults
-            println(testArr)
             
         }
         
