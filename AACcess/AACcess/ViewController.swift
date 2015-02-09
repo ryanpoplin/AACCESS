@@ -207,7 +207,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         var error: NSError? = nil
         if managedObjectContext!.save(&error) {
-            // println(error?.localizedDescription)
+            println(error?.localizedDescription)
         }
         
     }
