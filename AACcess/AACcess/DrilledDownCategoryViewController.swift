@@ -9,6 +9,9 @@
 import UIKit
 import CoreData
 
+/* ditto to the previous controller, except we utilize CategoryItem and only... */
+/* delete CategoryItem's... */
+
 class DrilledDownCategoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     lazy var managedObjectContext: NSManagedObjectContext? = {

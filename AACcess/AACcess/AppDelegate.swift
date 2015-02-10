@@ -11,6 +11,8 @@ import CoreData
 
 @UIApplicationMain  
 
+// Not going to be utilizing NSFetchedResultsController's helper methods...
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // create variables to hold a UIWindow and UINavigationController objects...
@@ -37,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // make the navigationController the root view...
         self.window!.rootViewController = navigationController
         
-        // ...
+        // make the window visible...
         self.window!.makeKeyAndVisible()
         
         return true
