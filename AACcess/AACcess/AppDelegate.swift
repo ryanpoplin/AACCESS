@@ -11,8 +11,6 @@ import CoreData
 
 @UIApplicationMain  
 
-// Not going to be utilizing NSFetchedResultsController's helper methods...
-
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // create variables to hold a UIWindow and UINavigationController objects...

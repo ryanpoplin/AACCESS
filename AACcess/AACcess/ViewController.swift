@@ -6,11 +6,9 @@
 //  Copyright (c) 2015 ExcepApps, Inc. All rights reserved.
 //
 
-// required framework imports...
 import UIKit
 import CoreData
 
-// ...
 public var categoryTitleProperty: String!
 
 // add required delegation protocols...
@@ -208,10 +206,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     
                     // delete all the categoryItems associated with the category...
                     managedObjectContext?.deleteObject(x as NSManagedObject)
-                    
-                    // CoreData save...
-                    save()
-                    
+                                        
                 }
                 
             }
@@ -283,7 +278,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var error: NSError? = nil
         // save the changes...
         if managedObjectContext!.save(&error) {
-            // print nil || an error...
             println(error?.localizedDescription)
         }
         
